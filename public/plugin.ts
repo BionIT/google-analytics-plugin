@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ConfigSchema } from '../config';
+import { ConfigSchema } from '../common/config';
 import { Plugin, PluginInitializerContext, CoreSetup, CoreStart } from '../../../src/core/public';
 import { GoogleAnalyticsPluginSetUp, GoogleAnalyticsPluginStart } from './index';
 import { renderApp } from './app';

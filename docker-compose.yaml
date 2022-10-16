@@ -1,0 +1,34 @@
+version: "3"  # optional
+services:
+  opensearch:
+    container_name: open-search
+    image: opensearchproject/opensearch:latest
+    environment:
+      - discovery.type=single-node # single node
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data
+    ports:
+      - "9200:9200"
+      - "9600:9600"
+    networks:
+      - opensearch-net
+  opensearchdashboard:
+    container_name: open-search-dashboard
+    image: opensearchproject/opensearch-dashboards:2.3.0
+    environment:
+      OPENSEARCH_HOSTS: "https://opensearch:9200"
+    ports:
+      - "5601:5601"
+    networks:
+      - opensearch-net
+    volumes:
+      - ./build:/usr/share/opensearch-dashboards/extra_plugins
+      - ./config:/usr/share/opensearch-dashboards/extra_config
+    command: sh -c "rm -rf /usr/share/opensearch-dashboards/plugins/googleAnalytics && bin/opensearch-dashboards-plugin --allow-root install 'file:///usr/share/opensearch-dashboards/extra_plugins/googleAnalytics-2.3.0.zip' && mv /usr/share/opensearch-dashboards/config/opensearch_dashboards.yml /usr/share/opensearch-dashboards/config/opensearch_dashboards.old.yml && cp /usr/share/opensearch-dashboards/extra_config/opensearch_dashboards.yml /usr/share/opensearch-dashboards/config && ./opensearch-dashboards-docker-entrypoint.sh opensearch-dashboards"
+
+volumes:
+  opensearch-data:
+
+networks:
+  opensearch-net:
