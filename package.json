@@ -1,0 +1,16 @@
+{
+  "name": "google-analytics",
+  "version": "2.3.0.0",
+  "description": "OpenSearch Dashboards Google Analytics Plugin",
+  "main": "index.ts",
+  "config": {
+    "id": "googleAnalytics",
+    "zip_name": "googleAnalytics"
+  },
+  "scripts": {
+    "build": "yarn plugin-helpers build",
+    "plugin-helpers": "node ../../scripts/plugin_helpers",
+    "opensearch": "node ../../scripts/opensearch",
+    "osd": "node ../../scripts/osd"
+  }
+}
