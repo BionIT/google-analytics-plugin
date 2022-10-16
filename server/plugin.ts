@@ -9,7 +9,7 @@ import {
   Plugin,
   PluginInitializerContext,
 } from 'opensearch-dashboards/server';
-import { ConfigSchema } from '../config';
+import { ConfigSchema } from '../common/config';
 
 export class GaServerPlugin implements Plugin<object, object> {
   readonly _initializerContext: PluginInitializerContext<ConfigSchema>;
