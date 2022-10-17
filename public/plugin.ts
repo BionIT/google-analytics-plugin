@@ -6,25 +6,22 @@
 import { ConfigSchema } from '../common/config';
 import { Plugin, PluginInitializerContext, CoreSetup, CoreStart } from '../../../src/core/public';
 import { GoogleAnalyticsPluginSetUp, GoogleAnalyticsPluginStart } from './index';
-import { renderApp } from './app';
+import ReactGA from 'react-ga4';
 
 export class GoogleAnalyticsPlugin
   implements Plugin<GoogleAnalyticsPluginSetUp, GoogleAnalyticsPluginStart> {
-  private readonly _initializerContext: PluginInitializerContext<ConfigSchema>;
-
   constructor(initializerContext: PluginInitializerContext<ConfigSchema>) {
     // can retrieve config from initializerContext
-    this._initializerContext = initializerContext;
+    const { trackingID } = initializerContext.config.get();
+    ReactGA.initialize(trackingID);
+    ReactGA.send("pageview");
   }
 
   public setup(core: CoreSetup): GoogleAnalyticsPluginSetUp {
-    const config = this.config;
-    return { config };
+    return {};
   }
 
   public start(core: CoreStart): GoogleAnalyticsPluginStart {
-    const { trackingID } = this._initializerContext.config.get();
-    renderApp(trackingID);
     return {};
   }
 }

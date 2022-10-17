@@ -12,5 +12,8 @@
     "plugin-helpers": "node ../../scripts/plugin_helpers",
     "opensearch": "node ../../scripts/opensearch",
     "osd": "node ../../scripts/osd"
+  },
+  "dependencies": {
+    "react-ga4": "^1.4.1"
   }
 }
