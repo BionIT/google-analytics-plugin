@@ -12,9 +12,7 @@ import {
 import { ConfigSchema } from '../common/config';
 
 export class GaServerPlugin implements Plugin<object, object> {
-  readonly _initializerContext: PluginInitializerContext<ConfigSchema>;
   constructor(initializerContext: PluginInitializerContext<ConfigSchema>) {
-    this._initializerContext = initializerContext;
   }
 
   public setup(core: CoreSetup) {
