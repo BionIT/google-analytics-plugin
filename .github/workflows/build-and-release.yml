@@ -1,0 +1,25 @@
+name: Build and Release Google Analytics Plugin
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        required: true
+        type: string
+  workflow_call:
+    inputs:
+      tag:
+        required: true
+        type: string
+
+jobs:
+  Build-Google-Analytics-Plugin-Inside-OSD-And-Release
+  runs-on: ubuntu-latest
+
+  steps:
+    - uses: actions/checkout@v3
+      with:
+        repository: opensearch-project/OpenSearch-Dashboards
+        ref: ${{inputs.tag}}
+    - run: pwd && ls
+
