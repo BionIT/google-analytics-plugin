@@ -1,6 +1,8 @@
 name: Scheduled Build and Release for Google Analytics Plugin
 
 on:
+  push:
+    branches: [ scheduled-build ]
   # Adds workflow_dispatch for manually running a workflow
   workflow_dispatch:
   # Adds schdeule event trigger for daily reset.
