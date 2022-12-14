@@ -1,0 +1,20 @@
+name: Scheduled Build and Release for Google Analytics Plugin
+
+on:
+  # Adds workflow_dispatch for manually running a workflow
+  workflow_dispatch:
+  # Adds schdeule event trigger for daily reset.
+  # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule
+  schedule:
+    # Run daily at 04:30 UTC.
+    - cron:  '30 04 * * *'
+jobs:
+  Schedule-Check-On-OSD-Release:
+    name: latestRelease
+    runs-on: ubuntu-latest
+    steps:
+      - id: keydb
+        uses: pozetroninc/github-action-get-latest-release@master
+        with:
+          repository: opensearch-project/OpenSearch-Dashboards
+      - run: echo ${{steps.keydb.outputs.release}}
