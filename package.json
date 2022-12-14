@@ -1,6 +1,6 @@
 {
   "name": "google-analytics",
-  "version": "2.4.0.0",
+  "version": "2.4.1.0",
   "description": "OpenSearch Dashboards Google Analytics Plugin",
   "main": "index.ts",
   "config": {
