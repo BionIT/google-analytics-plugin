@@ -12,8 +12,10 @@ on:
     - cron:  '30 04 * * *'
 jobs:
   Schedule-Check-On-OSD-Release:
-    name: latestRelease
     runs-on: ubuntu-latest
+    outputs:
+      osd_tag: ${{steps.osd.outputs.release}}
+      ga_tag: ${{steps.ga.outputs.release}}
     steps:
       - id: osd
         uses: pozetroninc/github-action-get-latest-release@master
@@ -25,9 +27,11 @@ jobs:
         with:
           repository: BionIT/google-analytics-plugin
       - run: echo ${{steps.ga.outputs.release}}
-      - if: ${{steps.osd.outputs.release == steps.ga.outputs.release }}
-        uses: BionIT/google-analytics-plugin/.github/workflows/build-and-release.yml@scheduled-build
-        with:
-          tag: ${{steps.osd.outputs.release}}
-      - run: echo "Completed"
+
+  Build-And-Release:
+    needs: Schedule-Check-On-OSD-Release
+    if: ${{ needs.Schedule-Check-On-OSD-Release.outputs.osd_tag == needs.Schedule-Check-On-OSD-Release.outputs.ga_tag }}
+    uses: BionIT/google-analytics-plugin/.github/workflows/build-and-release.yml@scheduled-build
+    with:
+      tag: ${{steps.osd.outputs.release}}
 
