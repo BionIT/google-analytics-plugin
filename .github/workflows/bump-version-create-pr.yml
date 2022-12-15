@@ -37,21 +37,21 @@ jobs:
           python3 bin/bump_version.py 2.5.1
           git branch
           git status
-          git add -A
-          git commit -m "auto commit"
-          gh pr create -B main -H bot --title 'Merge branch_to_merge into base_branch' --body 'Created by Github action'
-        env:
-          GITHUB_TOKEN: ${{ secrets.ga-pr-create-token }}
-
-#        uses: peter-evans/create-pull-request@v4
-#        with:
-#          token: ${{ secrets.ga-pr-create-token }}
-#          base: main
-#          commit-message: Bump Version to ${{inputs.tag}}
-#          committer: GitHub <noreply@github.com>
-#          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-#          assignees: BionIT
-#          reviewers: BionIT
+#          git add -A
+#          git commit -m "auto commit"
+#          gh pr create -B main -H bot --title 'Merge branch_to_merge into base_branch' --body 'Created by Github action'
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.ga-pr-create-token }}
+      - name: create pr
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.ga-pr-create-token }}
+          base: main
+          commit-message: Bump Version to ${{inputs.tag}}
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          assignees: BionIT
+          reviewers: BionIT
 
 
 
