@@ -21,6 +21,10 @@ jobs:
         with:
           repository: opensearch-project/OpenSearch-Dashboards
           ref: ${{inputs.tag}}
+      - uses: actions/setup-node@v3
+          with:
+            node-version-file: '.nvmrc'
+      - run: yarn osd bootstrap
       - uses: actions/checkout@v3
         with:
           repository: BionIT/google-analytics-plugin
@@ -29,7 +33,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
-      - run: node --version
-      - run: yarn build && cd build && ls -la
+      - run: yarn osd bootstrap && yarn build && cd build && ls -la
 
 
