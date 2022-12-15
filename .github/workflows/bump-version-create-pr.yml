@@ -34,7 +34,7 @@ jobs:
           python-version: 3.8
       - name: bump version
         run: |
-          python3 bin/bump_version.py ${{inputs.tag}}
+          python3 bin/bump_version.py 2.5.1
           git branch
           git status
           git add -A
