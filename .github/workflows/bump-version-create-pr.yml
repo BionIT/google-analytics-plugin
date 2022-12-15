@@ -27,19 +27,21 @@ jobs:
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
           git checkout -b bot
+          git branch
       - name: setup python
         uses: actions/setup-python@v3
         with:
           python-version: 3.8
       - name: bump version
         run: |
-          python3 bin/bump_version.py ${{inputs.tag}}
+          echo ${{inputs.tag}} && python3 bin/bump_version.py ${{inputs.tag}}
       - name: commit
         run: |
           # Stage the file, commit and push
-          
+          git branch
+          git status
           git add -A
-          git commit -m ""
+          git commit -m "auto commit"
       - name: create pr
         run: gh pr create -B main -H bot --title 'Merge branch_to_merge into base_branch' --body 'Created by Github action'
         env:
