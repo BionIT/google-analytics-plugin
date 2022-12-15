@@ -32,6 +32,9 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           token: ${{ secrets.ga-pr-create-token }}
+          add-paths: |
+            *.ext1
+            *.ext2
           commit-message: Bump Version to ${{inputs.tag}}
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
