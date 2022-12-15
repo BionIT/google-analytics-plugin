@@ -21,6 +21,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: setup git config
+          run: |
+            # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
+            git config user.name "GitHub Actions Bot"
+            git config user.email "<>"
+            git checkout -b bot
       - name: setup python
         uses: actions/setup-python@v3
         with:
@@ -28,18 +34,25 @@ jobs:
       - name: bump version
         run: |
           python3 bin/bump_version.py ${{inputs.tag}}
+      - name: commit
+        run: |
+          # Stage the file, commit and push
+          
+          git add -A
+          git commit -m ""
       - name: create pr
-        uses: peter-evans/create-pull-request@v4
-        with:
-          token: ${{ secrets.ga-pr-create-token }}
-          add-paths: |
-            *.ext1
-            *.ext2
-          commit-message: Bump Version to ${{inputs.tag}}
-          committer: GitHub <noreply@github.com>
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          assignees: BionIT
-          reviewers: BionIT
+        run: gh pr create -B main -H bot --title 'Merge branch_to_merge into base_branch' --body 'Created by Github action'
+        env:
+          GITHUB_TOKEN: ${{ secrets.ga-pr-create-token }}
+#        uses: peter-evans/create-pull-request@v4
+#        with:
+#          token: ${{ secrets.ga-pr-create-token }}
+#          base: main
+#          commit-message: Bump Version to ${{inputs.tag}}
+#          committer: GitHub <noreply@github.com>
+#          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+#          assignees: BionIT
+#          reviewers: BionIT
 
 
 
