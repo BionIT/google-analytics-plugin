@@ -28,10 +28,10 @@ jobs:
           repository: BionIT/google-analytics-plugin
       - run: echo ${{steps.ga.outputs.release}}
 
-  Build-And-Release:
+  Create-Pull-Request:
     needs: Schedule-Check-On-OSD-Release
     if: ${{ needs.Schedule-Check-On-OSD-Release.outputs.osd_tag == needs.Schedule-Check-On-OSD-Release.outputs.ga_tag }}
-    uses: BionIT/google-analytics-plugin/.github/workflows/build-and-release.yml@scheduled-build
+    uses: BionIT/google-analytics-plugin/.github/workflows/bump-version-create-pr.yml@scheduled-build
     with:
       tag: ${{needs.Schedule-Check-On-OSD-Release.outputs.osd_tag}}
 

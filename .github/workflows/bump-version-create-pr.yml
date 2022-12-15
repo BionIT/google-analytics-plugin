@@ -1,0 +1,50 @@
+name: Create Pull Request For Google Analytics Plugin Based on Input Tag
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        required: true
+        type: string
+  workflow_call:
+    inputs:
+      tag:
+        required: true
+        type: string
+
+jobs:
+  Bump-Version-And-Create-PR:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: opensearch-project/OpenSearch-Dashboards
+          ref: ${{inputs.tag}}
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+      - run: yarn osd bootstrap
+      - uses: actions/checkout@v3
+        with:
+          repository: BionIT/google-analytics-plugin
+          path: plugins/google-analytics-plugin
+      - run: cd plugins/google-analytics-plugin
+      - name: setup python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.8
+      - name: bump version
+        run: |
+          python3 bin/bump_version.py ${{inputs.tag}}
+      - name: create pr
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: Bump Version to ${{inputs.tag}}
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          assignees: BionIT
+          reviewers: BionIT
+
+
+
