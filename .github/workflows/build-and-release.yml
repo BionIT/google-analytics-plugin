@@ -13,13 +13,13 @@ on:
         type: string
 
 jobs:
-  Build-Google-Analytics-Plugin-Inside-OSD-And-Release
-  runs-on: ubuntu-latest
+  Build-Google-Analytics-Plugin-Inside-OSD-And-Release:
+    runs-on: ubuntu-latest
 
-  steps:
-    - uses: actions/checkout@v3
-      with:
-        repository: opensearch-project/OpenSearch-Dashboards
-        ref: ${{inputs.tag}}
-    - run: pwd && ls
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: opensearch-project/OpenSearch-Dashboards
+          ref: ${{inputs.tag}}
+      - run: pwd && ls
 
