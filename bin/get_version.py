@@ -14,5 +14,5 @@ def run():
         return ".".join(version)
 
 if __name__ == "__main__":
-    print("Gonna get")
+    print("Gonna get version from package.json file")
     run()
