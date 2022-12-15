@@ -27,5 +27,5 @@ def run():
         json.dump(data, f, indent = 4)
 
 if __name__ == "__main__":
-    print("running script")
+    print("#####running script to bump plugin version#####")
     run()
