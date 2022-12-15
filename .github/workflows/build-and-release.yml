@@ -1,0 +1,43 @@
+name: Build and Release Google Analytics Plugin
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        required: true
+        type: string
+
+jobs:
+  Build-Google-Analytics-Plugin-Inside-OSD-And-Release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: opensearch-project/OpenSearch-Dashboards
+          ref: ${{inputs.tag}}
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+      - run: yarn osd bootstrap
+      - uses: actions/checkout@v3
+        with:
+          repository: BionIT/google-analytics-plugin
+          path: plugins/google-analytics-plugin
+      - run: cd plugins/google-analytics-plugin
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+      - run: yarn install && yarn build
+      - uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{GITHUB_TOKEN}}
+          file: build/googleAnalytics*.zip
+          asset_name: googleAnalytics-${{inputs.tag}}
+          tag: ${{inputs.tag}}
+          overwrite: true
+          body: | 
+            ${{inputs.tag}}
+          
+
+

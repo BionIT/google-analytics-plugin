@@ -1,19 +1,19 @@
 {
-  "name": "google-analytics",
-  "version": "2.4.1.0",
-  "description": "OpenSearch Dashboards Google Analytics Plugin",
-  "main": "index.ts",
-  "config": {
-    "id": "googleAnalytics",
-    "zip_name": "googleAnalytics"
-  },
-  "scripts": {
-    "build": "yarn plugin-helpers build",
-    "plugin-helpers": "node ../../scripts/plugin_helpers",
-    "opensearch": "node ../../scripts/opensearch",
-    "osd": "node ../../scripts/osd"
-  },
-  "dependencies": {
-    "react-ga4": "^1.4.1"
-  }
+    "name": "google-analytics",
+    "version": "2.4.1.0",
+    "description": "OpenSearch Dashboards Google Analytics Plugin",
+    "main": "index.ts",
+    "config": {
+        "id": "googleAnalytics",
+        "zip_name": "googleAnalytics"
+    },
+    "scripts": {
+        "build": "yarn plugin-helpers build",
+        "plugin-helpers": "node ../../scripts/plugin_helpers",
+        "opensearch": "node ../../scripts/opensearch",
+        "osd": "node ../../scripts/osd"
+    },
+    "dependencies": {
+        "react-ga4": "^1.4.1"
+    }
 }
