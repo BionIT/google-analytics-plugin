@@ -27,7 +27,7 @@ jobs:
           python-version: 3.8
       - name: bump version
         run: |
-          python3 bin/bump_version.py 2.5.1
+          python3 bin/bump_version.py ${{inputs.tag}}
       - name: create pr
         uses: peter-evans/create-pull-request@v4
         with:

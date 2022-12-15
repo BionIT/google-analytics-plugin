@@ -29,8 +29,6 @@ jobs:
   Build-Google-Analytics-Plugin-Inside-OSD-And-Release:
     needs: Check-Release-Version-Diff
     if: ${{ needs.Check-Release-Version-Diff.outputs.ga_tag != needs.Check-Release-Version-Diff.outputs.ga_version }}
-    runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
       - name: create release
