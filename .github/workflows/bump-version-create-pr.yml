@@ -28,6 +28,7 @@ jobs:
       - name: create pr
         uses: peter-evans/create-pull-request@v4
         with:
+          token: ${{ secrets.GA_PR_CREATE_TOKEN }}
           commit-message: Bump Version to ${{inputs.tag}}
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
