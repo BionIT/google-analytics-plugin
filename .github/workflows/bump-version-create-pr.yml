@@ -11,6 +11,10 @@ on:
       tag:
         required: true
         type: string
+    secrets:
+      ga-pr-create-token:
+        required: true
+        type: string
 
 jobs:
   Bump-Version-And-Create-PR:
@@ -28,7 +32,7 @@ jobs:
       - name: create pr
         uses: peter-evans/create-pull-request@v4
         with:
-          token: ${{ secrets.GA_PR_CREATE_TOKEN }}
+          token: ${{ secrets.ga-pr-create-token }}
           commit-message: Bump Version to ${{inputs.tag}}
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>

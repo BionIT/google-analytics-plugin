@@ -34,4 +34,6 @@ jobs:
     uses: BionIT/google-analytics-plugin/.github/workflows/bump-version-create-pr.yml@scheduled-build
     with:
       tag: ${{needs.Schedule-Check-On-OSD-Release.outputs.osd_tag}}
+      secrets:
+        ga-pr-create-token: ${{secrets.GA_PR_CREATE_TOKEN}}
 
