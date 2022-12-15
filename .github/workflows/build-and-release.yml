@@ -28,7 +28,7 @@ jobs:
       - run: cd google-analytics-plugin
       - uses: actions/setup-node@v3
         with:
-          node-version-file: '.nvmrc''
+          node-version-file: '.nvmrc'
       - run: node --version
       - run: yarn build && cd build && ls -la
 
