@@ -33,5 +33,5 @@ jobs:
     if: ${{ needs.Schedule-Check-On-OSD-Release.outputs.osd_tag == needs.Schedule-Check-On-OSD-Release.outputs.ga_tag }}
     uses: BionIT/google-analytics-plugin/.github/workflows/build-and-release.yml@scheduled-build
     with:
-      tag: ${{steps.osd.outputs.release}}
+      tag: ${{needs.Schedule-Check-On-OSD-Release.outputs.osd_tag}}
 
