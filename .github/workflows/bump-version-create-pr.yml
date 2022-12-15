@@ -14,7 +14,6 @@ on:
     secrets:
       ga-pr-create-token:
         required: true
-        type: string
 
 jobs:
   Bump-Version-And-Create-PR:
