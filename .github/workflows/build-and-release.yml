@@ -21,8 +21,11 @@ jobs:
         with:
           repository: opensearch-project/OpenSearch-Dashboards
           ref: ${{inputs.tag}}
-      - run: cat package.json && cd plugins && git clone git@github.com:BionIT/google-analytics-plugin.git
-      - run: cd google-analytics-plugin
+      - uses: actions/checkout@v3
+        with:
+          repository: BionIT/google-analytics-plugin
+          path: plugins/google-analytics-plugin
+      - run: pwd && ls && cd plugins/google-analytics-plugin
       - uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
