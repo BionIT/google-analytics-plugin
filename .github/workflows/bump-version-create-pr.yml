@@ -34,18 +34,15 @@ jobs:
           python-version: 3.8
       - name: bump version
         run: |
-          echo ${{inputs.tag}} && python3 bin/bump_version.py ${{inputs.tag}}
-      - name: commit
-        run: |
-          # Stage the file, commit and push
+          python3 bin/bump_version.py ${{inputs.tag}}
           git branch
           git status
           git add -A
           git commit -m "auto commit"
-      - name: create pr
-        run: gh pr create -B main -H bot --title 'Merge branch_to_merge into base_branch' --body 'Created by Github action'
+          gh pr create -B main -H bot --title 'Merge branch_to_merge into base_branch' --body 'Created by Github action'
         env:
           GITHUB_TOKEN: ${{ secrets.ga-pr-create-token }}
+
 #        uses: peter-evans/create-pull-request@v4
 #        with:
 #          token: ${{ secrets.ga-pr-create-token }}
