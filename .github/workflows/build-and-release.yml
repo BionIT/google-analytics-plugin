@@ -21,5 +21,15 @@ jobs:
         with:
           repository: opensearch-project/OpenSearch-Dashboards
           ref: ${{inputs.tag}}
-      - run: pwd && ls
+      - run: cat package.json && cd plugins
+      - uses: actions/checkout@v3
+        with:
+          repository: BionIT/google-analytics-plugin
+      - run: cd google-analytics-plugin
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc''
+      - run: node --version
+      - run: yarn build && cd build && ls -la
+
 
