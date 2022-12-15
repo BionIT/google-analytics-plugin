@@ -21,13 +21,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: setup git config
-        run: |
-          # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
-          git checkout -b bot
-          git branch
+#      - name: setup git config
+#        run: |
+#          # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
+#          git config user.name "GitHub Actions Bot"
+#          git config user.email "<>"
+#          git checkout -b bot
+#          git branch
       - name: setup python
         uses: actions/setup-python@v3
         with:
@@ -35,8 +35,8 @@ jobs:
       - name: bump version
         run: |
           python3 bin/bump_version.py 2.5.1
-          git branch
-          git status
+#          git branch
+#          git status
 #          git add -A
 #          git commit -m "auto commit"
 #          gh pr create -B main -H bot --title 'Merge branch_to_merge into base_branch' --body 'Created by Github action'
