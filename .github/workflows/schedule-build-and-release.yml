@@ -2,7 +2,7 @@ name: Scheduled Build and Release for Google Analytics Plugin
 
 on:
   push:
-    branches: [ scheduled-build ]
+    branches: [ main ]
   # Adds workflow_dispatch for manually running a workflow
   workflow_dispatch:
   # Adds schdeule event trigger for daily reset.
@@ -30,7 +30,7 @@ jobs:
 
   Create-Pull-Request:
     needs: Schedule-Check-On-OSD-Release
-    if: ${{ needs.Schedule-Check-On-OSD-Release.outputs.osd_tag == needs.Schedule-Check-On-OSD-Release.outputs.ga_tag }}
+    if: ${{ needs.Schedule-Check-On-OSD-Release.outputs.osd_tag != needs.Schedule-Check-On-OSD-Release.outputs.ga_tag }}
     uses: BionIT/google-analytics-plugin/.github/workflows/bump-version-create-pr.yml@scheduled-build
     with:
       tag: ${{needs.Schedule-Check-On-OSD-Release.outputs.osd_tag}}

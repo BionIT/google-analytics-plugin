@@ -2,16 +2,46 @@ name: Build and Release Google Analytics Plugin
 
 on:
   workflow_dispatch:
-    inputs:
-      tag:
-        required: true
-        type: string
+  push:
+    branches: [ main ]
 
 jobs:
-  Build-Google-Analytics-Plugin-Inside-OSD-And-Release:
+  Check-Release-Version-Diff:
     runs-on: ubuntu-latest
-
+    outputs:
+      ga_tag: ${{steps.ga.outputs.release}}
+      ga_version: ${{steps.ga-version.outputs.version}}
     steps:
+      - id: ga
+        uses: pozetroninc/github-action-get-latest-release@master
+        with:
+          repository: BionIT/google-analytics-plugin
+      - run: echo ${{steps.ga.outputs.release}}
+      - name: setup python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.8
+      - id: ga-version
+        run: |
+          output=$(python3 bin/get_version.py)
+          echo ::set-output name=version::$output
+
+  Build-Google-Analytics-Plugin-Inside-OSD-And-Release:
+    needs: Check-Release-Version-Diff
+    if: ${{ needs.Check-Release-Version-Diff.outputs.ga_tag != needs.Check-Release-Version-Diff.outputs.ga_version }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: create release
+        uses: BionIT/create-release@main
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:
+          tag_name: ${{needs.Check-Release-Version-Diff.outputs.ga_tag}}
+          release_name: ${{needs.Check-Release-Version-Diff.outputs.ga_tag}}
+          body: |
+            Release ${{needs.Check-Release-Version-Diff.outputs.ga_tag}}
+          prerelease: false
+          draft: false
       - uses: actions/checkout@v3
         with:
           repository: opensearch-project/OpenSearch-Dashboards
@@ -34,10 +64,9 @@ jobs:
           repo_token: ${{GITHUB_TOKEN}}
           file: build/googleAnalytics*.zip
           asset_name: googleAnalytics-${{inputs.tag}}
-          tag: ${{inputs.tag}}
-          overwrite: true
-          body: | 
-            ${{inputs.tag}}
+          tag: ${{needs.Check-Release-Version-Diff.outputs.ga_tag}}
+          body: |
+            Release ${{needs.Check-Release-Version-Diff.outputs.ga_tag}}
           
 
 
