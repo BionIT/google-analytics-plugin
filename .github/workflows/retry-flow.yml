@@ -1,0 +1,21 @@
+name: Deploy OpenSearch and OpenSearch Dashboards
+
+on:
+  # adds workflow_dispatch for manually running a workflow
+  workflow_dispatch:
+
+jobs:
+  OSD-Functional-Test-OSD:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 1 - Check If OSD is Up
+        uses: ./
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: |
+            sleep 30s
+            curl -XGET -k -u 'admin:Admin_123' 'https://playground.opensearch.oss.aws.dev/api/status' 
+            echo "success"
+    
+
