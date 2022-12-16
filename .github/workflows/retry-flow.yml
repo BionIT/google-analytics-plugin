@@ -3,6 +3,8 @@ name: Deploy OpenSearch and OpenSearch Dashboards
 on:
   # adds workflow_dispatch for manually running a workflow
   workflow_dispatch:
+  push:
+    branches: [ testretry ]
 
 jobs:
   OSD-Functional-Test-OSD:
