@@ -14,5 +14,5 @@ server.host: '0.0.0.0'
 # change to use your GA4 trackingID
 google_analytics_plugin.trackingID: ""
 # need to allow app to talk to google analytics site and map service
-csp.rules: ["connect-src 'self' www.google-analytics.com maps.opensearch.org;"]
-csp.warnLegacyBrowsers: false
+#csp.rules: ["connect-src 'self' www.google-analytics.com maps.opensearch.org;"]
+#csp.warnLegacyBrowsers: false
