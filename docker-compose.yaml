@@ -2,7 +2,7 @@ version: "3"  # optional
 services:
   opensearch:
     container_name: open-search
-    image: opensearchproject/opensearch:2.5.0
+    image: opensearchproject/opensearch:2.6.0
     environment:
       - discovery.type=single-node # single node
       - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
@@ -15,7 +15,7 @@ services:
       - opensearch-net
   opensearchdashboard:
     container_name: open-search-dashboard
-    image: opensearchproject/opensearch-dashboards:2.5.0
+    image: opensearchproject/opensearch-dashboards:2.6.0
     environment:
       OPENSEARCH_HOSTS: "https://opensearch:9200"
     ports:
