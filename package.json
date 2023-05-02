@@ -1,6 +1,6 @@
 {
     "name": "google-analytics",
-    "version": "2.6.0.0",
+    "version": "2.7.0.0",
     "description": "OpenSearch Dashboards Google Analytics Plugin",
     "main": "index.ts",
     "config": {
@@ -14,6 +14,7 @@
         "osd": "node ../../scripts/osd"
     },
     "dependencies": {
-        "react-ga4": "^1.4.1"
+        "react-ga4": "^1.4.1",
+        "yarn": "^1.22.19"
     }
 }
