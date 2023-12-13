@@ -1,7 +1,7 @@
 {
     "id": "googleAnalytics",
-    "version": "2.8.0.0",
-    "opensearchDashboardsVersion": "2.8.0",
+    "version": "1.3.14.0",
+    "opensearchDashboardsVersion": "1.3.14",
     "requiredPlugins": [
         "opensearchDashboardsLegacy"
     ],
